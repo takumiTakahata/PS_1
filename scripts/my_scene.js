@@ -11,20 +11,34 @@ class MyScene extends Phaser.Scene {
     // シーンの事前読み込み処理
     preload() {
          // 画像の読み込み(使用する時の名前, パス)
-        this.load.image('sky', 'assets/sky.png');
-        this.load.image('alien1', 'assets/alien1.png');
+        this.load.image('background', 'assets/background.png');
+        this.load.image('taro', 'assets/taro.png');
     }
 
     // シーン初期化処理
     create() {
          // 単体画像をシーンに追加(X座標,Y座標,画像名)
-        this.add.image(D_WIDTH/2, D_HEIGHT/2, 'sky');
-        this.add.image(D_WIDTH/2, D_HEIGHT/2, 'alien1');
+        this.add.image(D_WIDTH/2, D_HEIGHT/2, 'background');
         this.text = this.add.text(10, 10, 'Scene 1').setFontSize(32).setColor('#ff0');
+        this.player = this.add.image(D_WIDTH/2, D_HEIGHT/2, 'taro');
+        // プレイヤーの移動方向フラグを設定　１：右向き　−１：左向き
+        this.player_direction = 1;
+        // this.taro.angle = 0
     }
     
   // 毎フレーム実行される繰り返し処理
     update() {
+            // プレイヤーの向きフラグを変更
+    if (this.player.y >= D_HEIGHT - 100) this.player_direction = -1;
+    if (this.player.y <= 100) this.player_direction = 1;
+    // プレイヤーの移動
+    if (this.player_direction == 1) {
+      this.player.y += 7;// 横方向へ移動を設定
+      this.player.x += 7;// 横方向へ移動を設定
+    } else {
+      this.player.y -= 7;// 横方向へ移動を設定
+      this.player.x -= 7;// 横方向へ移動を設定
+    }
     }
 
 }
