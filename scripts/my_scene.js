@@ -39,7 +39,7 @@ class MyScene extends Phaser.Scene {
             this.player.angle += 5;
             // 回転角度を設定
             this.player.setAngle(this.player.angle);
-        }
+        }   
     }
 
 }
