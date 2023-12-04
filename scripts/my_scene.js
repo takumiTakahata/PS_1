@@ -117,5 +117,7 @@ class MyScene extends Phaser.Scene {
 // 衝突時の処理
 handleCollision(player, player2) {
     this.text = this.add.text(100, 150, '痛い!').setFontSize(32).setColor('#ff0');
+        // hanakoオブジェクトを非表示にする
+        this.player2.visible = false;
 }
 }
