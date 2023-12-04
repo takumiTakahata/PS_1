@@ -14,6 +14,7 @@ class MyScene extends Phaser.Scene {
         this.load.image('background', 'assets/background.png');
         this.load.image('taro', 'assets/taro.png');
         this.load.image('jori', 'assets/taro.png');
+        this.load.image('hanako', 'assets/hanako.png');
     }
 
     // シーン初期化処理
@@ -23,6 +24,7 @@ class MyScene extends Phaser.Scene {
         this.text = this.add.text(600, 400, 'MyWorld').setFontSize(32).setColor('#ff0');
         this.player = this.add.image(D_WIDTH / 2, D_HEIGHT / 2, 'taro');
         this.player1 = this.add.image(D_WIDTH / 2, D_HEIGHT / 2, 'jori');
+
         // プレイヤーの移動方向フラグを設定　１：右向き　−１：左向き
         // this.player_direction = 1;
         // this.player.angle = 0
@@ -31,6 +33,7 @@ class MyScene extends Phaser.Scene {
 
         ///WASDキーを検知できるようにする
         this.keys = {};
+        this.keys.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         this.keys.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.keys.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.keys.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -73,5 +76,12 @@ class MyScene extends Phaser.Scene {
         } else if (this.keys.keyD.isDown) {
             this.text.setText(''); // テキストを空にする
         }
+
+        //1-7 
+        // if (this.keys.keyW.isDown) {
+        //     // hanakoオブジェクトを動的に配置
+        //     this.player2 = this.add.image(100, 100, 'hanako');
+        //     this.player2.x = Phaser.Math.Between(100, 400);
+        // }
     }
 }
