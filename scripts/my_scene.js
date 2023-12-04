@@ -38,13 +38,13 @@ class MyScene extends Phaser.Scene {
         this.keys.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.keys.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
-        this._timeCounter = 0; 
+        this._timeCounter = 0;
         this.time = 0;
         this.player2 = this.add.image(100, 100, 'hanako');
         this.player2.visible = false;
 
         this.physics.world.enable([this.player, this.player2]);
-        
+
     }
 
     // 毎フレーム実行される繰り返し処理
@@ -98,26 +98,31 @@ class MyScene extends Phaser.Scene {
         this._timeCounter += delta;
         // _timeCounterが1000になった1秒
         if (this._timeCounter > 1000) {
-        // 3000ミリ秒経過したのでカウンターをリセット
-        this._timeCounter = 0;
-        // 残り時間を増やす
-        this.time++;
-        // 3秒経ったらhanakoオブジェクトをランダムな座標に配置
-        if (this.time === 3) {
-            this.player2.visible = true; // オブジェクトを表示にする
-            this.player2.x = Phaser.Math.Between(200, 400);
-            this.player2.y = Phaser.Math.Between(100, 200);
-        }
+            // 3000ミリ秒経過したのでカウンターをリセット
+            this._timeCounter = 0;
+            // 残り時間を増やす
+            this.time++;
+            // 3秒経ったらhanakoオブジェクトをランダムな座標に配置
+            if (this.time === 3) {
+                this.player2.visible = true; // オブジェクトを表示にする
+                this.player2.x = Phaser.Math.Between(200, 400);
+                this.player2.y = Phaser.Math.Between(100, 200);
+            }
         }
         if (this.physics.overlap(this.player, this.player2)) {
             this.handleCollision();
         }
     }
-// 1-9
-// 衝突時の処理
-handleCollision(player, player2) {
-    this.text = this.add.text(100, 150, '痛い!').setFontSize(32).setColor('#ff0');
+    // 1-9
+    // 衝突時の処理
+    handleCollision(player, player2) {
+        this.text = this.add.text(100, 150, '痛い!').setFontSize(32).setColor('#ff0');
         // hanakoオブジェクトを非表示にする
         this.player2.visible = false;
-}
+        // 0.5秒後にプログラムを終了する
+    setTimeout(() => {
+        // ゲームのシーンを停止
+        this.scene.stop();
+    }, 500);
+    }
 }
